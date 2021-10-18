@@ -1,17 +1,24 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-    // understanding requests
-    console.log(req.url, req.method, req.headers);
+    const url = req.url;
 
-    //process.exit() // used to hard exit out of node.js program
+    if (url === '/') {
+        res.setHeader('Content-Type', 'text/html');
+        res.write('<html>');
+        res.write('<head><title>My first page</title></head>');
+        res.write('<body><form action="/message" method="POST"><input type="text" name="message"/><button type="submit">send</button></body>');
+        res.write('</html>');
+        return res.end();
+    }
 
-    // sending responses
     res.setHeader('Content-Type', 'text/html');
     res.write('<html>');
     res.write('<head><title>My first page</title></head>');
     res.write('<body><h1>Hello from my Node.js server</h1></body>');
-    res.write('</html>')
+    res.write('</html>');
+    res.end();
+
 });
 
 server.listen(3000);
