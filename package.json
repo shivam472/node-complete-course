@@ -1,0 +1,24 @@
+{
+  "name": "node-complete-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivam472/node-complete-course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivam472/node-complete-course/issues"
+  },
+  "homepage": "https://github.com/shivam472/node-complete-course#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
