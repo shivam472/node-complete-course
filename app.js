@@ -17,6 +17,7 @@ const server = http.createServer((req, res) => {
     // Redirecting requests
     if (url === '/message' && method === 'POST') {
         const body = [];
+
         req.on('data', (chunk) => {
             body.push(chunk);
         });
@@ -24,10 +25,14 @@ const server = http.createServer((req, res) => {
         return req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString();
             const message = parsedBody.split('=')[1];
-            fs.writeFileSync('message.txt', message);
-            res.statusCode = 302;
-            res.setHeader('Location', '/');
-            return res.end();
+
+            // Blocking & Non-Blocking code
+            // fs.writeFileSync('message.txt', message);
+            fs.writeFile('message.txt', message, err => {
+                res.statusCode = 302;
+                res.setHeader('Location', '/');
+                return res.end();
+            });
         });
     }
 
@@ -40,7 +45,7 @@ const server = http.createServer((req, res) => {
 
 });
 
-server.listen(3000);
+server.listen(4000);
 
 
 
