@@ -20,5 +20,8 @@
   "homepage": "https://github.com/shivam472/node-complete-course#readme",
   "devDependencies": {
     "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
