@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const server = http.createServer((req, res) => {
     const url = req.url;
+    const method = req.method;
 
     if (url === '/') {
         res.setHeader('Content-Type', 'text/html');
@@ -15,10 +16,19 @@ const server = http.createServer((req, res) => {
 
     // Redirecting requests
     if (url === '/message' && method === 'POST') {
-        fs.writeFileSync('message.txt', 'DUMMY');
-        res.statusCode = 302;
-        res.setHeader('Location', '/');
-        return res.end();
+        const body = [];
+        req.on('data', (chunk) => {
+            body.push(chunk);
+        });
+
+        return req.on('end', () => {
+            const parsedBody = Buffer.concat(body).toString();
+            const message = parsedBody.split('=')[1];
+            fs.writeFileSync('message.txt', message);
+            res.statusCode = 302;
+            res.setHeader('Location', '/');
+            return res.end();
+        });
     }
 
     res.setHeader('Content-Type', 'text/html');
