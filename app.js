@@ -1,7 +1,17 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-    console.log(req);
+    // understanding requests
+    console.log(req.url, req.method, req.headers);
+
+    //process.exit() // used to hard exit out of node.js program
+
+    // sending responses
+    res.setHeader('Content-Type', 'text/html');
+    res.write('<html>');
+    res.write('<head><title>My first page</title></head>');
+    res.write('<body><h1>Hello from my Node.js server</h1></body>');
+    res.write('</html>')
 });
 
 server.listen(3000);
